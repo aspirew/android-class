@@ -13,20 +13,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.android_class_05_2023.Detail
 import com.example.android_class_05_2023.Title
+import com.example.android_class_05_2023.state.BusinessDataState
 import com.example.android_class_05_2023.ui.theme.AndroidClass052023Theme
 
 @Composable
-fun BusinessCard(){
+fun BusinessCard(businessDataState: BusinessDataState){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround,
         modifier = Modifier.fillMaxHeight(),
     ) {
         Box {}
-        Title(name = "Rafał Behrendt", "Software dev")
+        Title(name = businessDataState.name, businessDataState.title)
         Column {
-            Detail(text = "123 456 789", icon = Icons.Rounded.Phone)
-            Detail(text = "raf.behrendt@gmail.com", icon = Icons.Rounded.Email)
+            Detail(text = businessDataState.phone, icon = Icons.Rounded.Phone)
+            Detail(text = businessDataState.mail, icon = Icons.Rounded.Email)
         }
     }
 }
@@ -35,6 +36,7 @@ fun BusinessCard(){
 @Composable
 fun BusinessCardPreview(){
     AndroidClass052023Theme {
-        BusinessCard()
+        val businessDataState = BusinessDataState("Rafał Behrendt", "Software Dev", "raf.behrendt@gmail.com", "123 134 213")
+        BusinessCard(businessDataState)
     }
 }
