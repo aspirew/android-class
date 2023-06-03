@@ -25,7 +25,13 @@ fun BusinessDataInputScreen(businessDataState: MutableState<BusinessDataState>, 
         modifier = Modifier.fillMaxHeight(),
     ) {
         BusinessDataInputFields(businessDataState)
-        Button(onClick = { onNavigateToCard() }) {
+        Button(onClick = {
+            if(!businessDataState.value.isError) {
+                onNavigateToCard()
+            }
+        },
+            enabled = !businessDataState.value.isError && businessDataState.value.isAllFilled()
+            ) {
             Text(text = "Generate")
         }
     }
